@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Incident Reporting</title>
+
+        <!-- Bootstrap -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/united/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootswatch.min.css">
+
+        <!-- Datepicker -->
+        <link rel="stylesheet" href="dtp/css/bootstrap-datetimepicker.min.css" />
+
+        <!-- File Uploader -->
+        <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+        <link rel="stylesheet" href="fileupload/css/jquery.fileupload.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="jquery/jquery.min.js"></script>
+        
+        <style>
+            .panel a:link {
+                color: #333;
+                text-decoration: none;
+            }
+            .panel a:visited {
+                color: #333;
+                text-decoration: none;
+            }
+            .panel a:hover {
+                color: #777;
+                text-decoration: none;
+            }
+            .panel a:active {
+                color: #333;
+                text-decoration: none;
+            }
+        </style>
+        
+    </head>
+    <body style="background-color:#004990;">
+        <div class="container">
+            <div class="jumbotron">
+                <img style="float:left; margin-right: 20px; margin-bottom: 20px;"  class="img-responsive" src="images/logo.png" />
+                <h1 style="color: #004990;">Incident Reporting Form</h1>
+                <p style="font-weight: bold;">To report an issue of immediate concern to an individual’s safety or the campus’s safety, first call 911 or Public Safety at 706-252-4813 and then fill out this report.</p>
+            </div>
+            <div class="messageSaved"></div>
+            <div class="well">
+                <form id="incidentReport" name="incidentReport" class="form-horizontal" data-parsley-validate>
+                    <fieldset>
+                        <legend>Please provide as much detailed information regarding the incident as possible.</legend>
+                        <!--Background Information-->
+                        <h3 style="color: #004990;">Your Background Information</h3>
+                        
+			<div class="form-group">
+                            <label class="col-lg-2 control-label" for="submitterName">Name</label>
+                            <div class="col-lg-10">
+                                <input maxlength="255" id="submitterName" name="submitterName" type="text" value="" class="form-control input-md" placeholder="enter full name or Anonymous" required />
+                            </div>
+                            
+                            <label class="col-lg-2 control-label" for="submitterTitle">Status</label>
+                            <div class="col-lg-10">
+                                <input maxlength="255" id="submitterTitle" name="submitterTitle" type="text" value="" class="form-control input-md" placeholder="student, faculty, staff, etc." required />
+                            </div>
+                            
+                            <label class="col-lg-2 control-label" for="submitterPhone">Phone Number</label>
+                            <div class="col-lg-10">
+                                <input maxlength="255" id="submitterPhone" name="submitterPhone" type="text" value="" class="form-control input-md" placeholder="(123) 456-7890" />
+                            </div>
+                            
+                            <label class="col-lg-2 control-label" for="submitterEmail">E-mail Address</label>
+                            <div class="col-lg-10">
+                                <input maxlength="255" id="submitterEmail" name="submitterEmail" type="email" value="" class="form-control input-md" placeholder="someone@example.com" />
+                            </div>
+                        </div>
+                        
+                        <!--Incident Description-->
+                        <h3 style="color: #004990;">Incident Description</h3>
+                        
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="incidentDescription">Please provide a detailed description of the incident, including descriptions of unknown individuals.</label>
+                            <div class="col-lg-10">                     
+                                <textarea maxlength="5000" class="form-control" rows="5" id="incidentDescription" name="incidentDescription" required ></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="reportUrgency">Priority</label>
+                            <div class="col-lg-2">
+                                <div class="input-group">
+                                    <span class="radio-inline">
+                                        <input type="radio" value="0" name="reportUrgency" id="reportUrgencyNormal" checked> Normal
+                                    </span>
+                                    <span class="radio-inline">
+                                        <input type="radio" value="1" name="reportUrgency" id="reportUrgencyUrgent"> Urgent
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="incidentDate">Incident Date/Time</label>
+                            <div class="col-lg-2">
+                                <div class="input-group date" id="incidentDate">
+                                    <input id="incidentDate" name="incidentDate" value="" type="text" class="form-control" readonly />
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+			    <div class="col-lg-2">
+                                <div class="input-group date" id="incidentTime">
+                                    <input id="incidentTime" name="incidentTime" value="" type="text" class="form-control" readonly />
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+			
+                        <script type="text/javascript">
+                            jQuery(function($) {
+                                $('#incidentDate').datetimepicker({
+					pickTime: false
+					});
+                                $('#incidentTime').datetimepicker({
+					pickDate: false
+					});
+                            });
+                        </script>
+                        
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="incidentLocationGeneric">Location of the Incident</label>
+                            <div class="col-lg-10">
+                                <select id="incidentLocationGeneric" name="incidentLocationGeneric[]" class="form-control" multiple="multiple" >
+                                    <option value="Cartersville off-campus">Cartersville off-campus</option>
+                                    <option value="Cartersville on-campus">Cartersville on-campus</option>
+                                    <option value="Douglasville off-campus">Douglasville off-campus</option>
+                                    <option value="Douglasville on-campus">Douglasville on-campus</option>
+                                    <option value="Floyd off-campus">Floyd off-campus</option>
+                                    <option value="Floyd on-campus">Floyd on-campus</option>
+                                    <option value="Heritage off-campus">Heritage off-campus</option>
+                                    <option value="Heritage on-campus">Heritage on-campus</option>
+                                    <option value="Marietta off-campus">Marietta off-campus</option>
+                                    <option value="Marietta on-campus">Marietta on-campus</option>
+                                    <option value="Paulding off-campus">Paulding off-campus</option>
+                                    <option value="Paulding on-campus">Paulding on-campus</option>
+                                    <option value="Other off-campus">Other off-campus</option>
+                                    <option value="Other on-campus">Other on-campus</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="incidentLocationSpecific">Specific Location</label>
+                            <div class="col-lg-10">
+                                <input maxlength="255" id="incidentLocationSpecific" name="incidentLocationSpecific" type="text" value="" class="form-control input-md" />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="publicSafetyResponse">Did Public Safety respond to the incident?</label>
+                            <div class="col-lg-2">
+                                <div class="input-group">
+                                    <span class="radio-inline">
+                                        <input type="radio" value="1" name="publicSafetyResponse" id="policeResponseYes"> Yes
+                                    </span>
+                                    <span class="radio-inline">
+                                        <input type="radio" value="0" name="publicSafetyResponse" id="policeResponseNo"> No
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="col-lg-3 control-label" for="respondingOrganization">Responding Organization</label>
+                            <div class="col-lg-3">
+                                <select id="respondingOrganization" name="respondingOrganization[]" class="form-control" multiple="multiple">
+                                    <option value="Public Safety">Public Safety</option>
+                                    <option value="Sheriff's Office">Sheriff's Office</option>
+                                    <option value="Police">Police</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!--Involved Parties-->
+                        <h3 style="color: #004990;">Involved Parties</h3>
+                        <h4>Please list the individuals involved, including as much information as possible.</h4>
+                        <div id="partyContainer">
+                            <div class="form-group" id="party1">
+                                <label class="col-lg-2 control-label" for="partyName1">Name</label>
+                                <div class="col-lg-6">
+                                    <input maxlength="80" id="partyName" name="partyName[]" type="text" value="" class="form-control input-md valid" placeholder="full name">
+                                </div>
+
+                                <label class="col-lg-1 control-label" for="partyRole">Role</label>
+                                <div class="col-lg-3">
+                                    <select id="partyRole" name="partyRole[]" class="form-control" >
+                                        <option value="">Please Select</option>
+                                        <option value="Accused">Accused</option>
+                                        <option value="Victim">Victim</option>
+                                        <option value="Witness">Witness</option>
+                                        <option value="Student of Concern">Student of Concern</option>
+                                        <option value="Person of Concern">Person of Concern</option>
+                                    </select>
+                                </div>
+                                
+                                <label class="col-lg-2 control-label" for="partyGender">Gender</label>
+                                <div class="col-lg-2">
+                                    <select id="partyGender" name="partyGender[]" class="form-control" >
+                                        <option value="">Please Select</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+
+                                <label class="col-lg-1 control-label" for="partyEmail">E-mail</label>
+                                <div class="col-lg-3">
+                                    <input maxlength="255" id="partyEmail" name="partyEmail[]" type="email" value="" class="form-control input-md" placeholder="someone@example.com"/>
+                                </div>
+
+                                <label class="col-lg-1 control-label" for="partyPhone">Phone</label>
+                                <div class="col-lg-2">
+                                    <input maxlength="14" id="partyPhone" name="partyPhone[]" type="text" value="" class="form-control input-md" placeholder="(123) 456-7890" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="btn btn-default addParty"><span class="glyphicon glyphicon-plus"></span></button>
+                        
+                        <hr />
+                        
+                    </fieldset>
+                    <button id="val" name="val" type="submit" class="btn btn-lg btn-success center-block">Report Incident</button>
+                </form>
+            </div>
+            <!-- Include all compiled plugins (below), or include individual files as needed -->
+            <!-- Latest compiled and minified JavaScript -->
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+            <script src="js/bootswatch.js"></script>
+            <!-- jQuery Form Validation -->
+            <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+            <!-- DateTimePicker JavaScript -->
+            <script src="dtp/js/moment.min.js"></script>
+            <script src="dtp/js/bootstrap-datetimepicker.js"></script>
+            <script src="main.js"></script>
+        </div> <!-- /container -->
+        <div class='container'>
+            <div align="center" class="footer text-primary">
+                <p>&copy; Georgia Highlands College 2014 to Present</p>
+            </div>
+        </div>
+    </body>
+</html>

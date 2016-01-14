@@ -1,0 +1,34 @@
+<?
+//session_start();
+//include 'inc/opendb.php';
+$username = "jclark";
+
+$wwwuser = 'root';
+$wwwpass = 'europe-guilty-kaleidoscope-head'; // last updated 03/26/15 mh
+
+//WebDev server hostname
+$dbhost = 'localhost';
+// $dbhost = 'www.highlands.edu';
+$dbuser = $wwwuser;
+$dbpass = $wwwpass;
+
+$dbname3 = 'assessment';
+
+$conn3 = mysql_connect($dbhost, $dbuser, $dbpass) or die                      ('Error connecting to mysql');
+
+
+$result = mysql_select_db($dbname3);
+echo $result;
+
+/*
+$theteam = @$_GET['team'];
+*/
+
+//$getassessment = mysql_query("SELECT * FROM assessment,goals WHERE goals.goals_id=assessment.goals_id AND assessment_id='$assessment_id';", $conn3);
+$getassessment = mysql_query("SELECT * FROM assessment,goals", $conn3);
+echo $getassessment;
+
+$getuser = mysql_query("SELECT users_id FROM users WHERE users_username='$username';", $conn3);
+$usercheck = mysql_num_rows($getuser);
+echo $usercheck;
+?>

@@ -1,0 +1,36 @@
+<?php
+// Set username
+$username = "mhannah";
+
+// Set user name and password
+$wwwuser = 'root';
+$wwwpass = 'europe-guilty-kaleidoscope-head'; // last updated 03/26/15 mh
+
+//WebDev server hostname
+$dbhost = 'localhost';
+$dbuser = $wwwuser;
+$dbpass = $wwwpass;
+
+//Set DB name
+//$dbname3 = 'assessment_2';
+
+// Create PDO Connection object
+    $dbh = new PDO('mysql:host=localhost;dbname=Assessment_2', $wwwuser, $wwwpass);
+
+//Set $assessment for the id URL parameter if it's there  
+  //$assessment_id = @$_GET['id'];
+  
+  //Check to see if user is in the users table
+ // $getuser = $dbh->query("SELECT users_id FROM users WHERE users_username='$username'");
+  //echo $usercheck = $getuser->rowCount();
+
+//Check to see if user is a member of more than one team
+
+//$getusercount =$dbh->query("SELECT * FROM users");
+
+ $getusercount =$dbh->query("SELECT * FROM users where users_usersname='mhannah'");
+    echo $usercount =$getusercount->rowCount();	
+    echo "this";
+//$usercount =$getusercount->rowCount();	
+echo $getusercount;
+?>

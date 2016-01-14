@@ -1,0 +1,43 @@
+.my-container
+{
+width: 80%;
+align-content: center;
+}
+.dept-header
+{
+font-size: xx-large;
+}
+.team-header
+{
+width:100%;
+padding-top: 50px;
+font-size:x-large;
+font-weight: bold;
+}
+.my-cell
+{
+float: left;
+width: 50%;
+font-size: large;
+
+}
+@media screen and (max-width: 500px)  
+	{
+	.team-header
+		{
+		font-size: medium;
+		}
+		.my-cell
+		{
+		font-size: smaller;
+		}
+
+}
+
+@media print
+{
+	.myform 
+	{
+	display: none;
+	}
+}
